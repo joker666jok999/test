@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест: Кто ты из мемов? 🤔</title>
+    <style>
+        /* Делаем страницу похожей на обычный тест */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: #f0f2f5; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+        button {
+            background: #0084ff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover { transform: scale(1.05); }
+
+        /* Скример (изначально скрыт) */
+        #screamer-wrap {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            z-index: 9999;
+        }
+        #screamer-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Узнай, какой ты мем сегодня!</h1>
+        <p>Нажми кнопку ниже, чтобы искусственный интеллект проанализировал твой профиль.</p>
+        <button onclick="boom()">Начать анализ</button>
+    </div>
+
+    <div id="screamer-wrap">
+        <img id="screamer-img" src="https://raw.githubusercontent.com/reallunatic/Screamer/master/scary.jpg">
+        <audio id="screamer-snd" preload="auto">
+            <source src="https://raw.githubusercontent.com/reallunatic/Screamer/master/scream.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        function boom() {
+            const wrap = document.getElementById('screamer-wrap');
+            const audio = document.getElementById('screamer-snd');
+            
+            // 1. Показываем картинку
+            wrap.style.display = 'block';
+            
+            // 2. Включаем звук на полную
+            audio.volume = 1.0;
+            audio.play().catch(e => console.log("Ошибка звука:", e));
+
+            // 3. Пытаемся раскрыть на весь экран (пугает еще сильнее)
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>
